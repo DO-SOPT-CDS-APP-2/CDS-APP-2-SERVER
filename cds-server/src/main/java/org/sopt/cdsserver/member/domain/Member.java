@@ -1,4 +1,4 @@
-package org.sopt.cdsserver.product.domain;
+package org.sopt.cdsserver.member.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -6,18 +6,13 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Product {
+public class Member {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String title;
+    private String userId;
 
-    private Brand brand; //enum
-
-    private int price;
-
-    private int discount;
-
-    private String details;
+    private String userName;
 }
