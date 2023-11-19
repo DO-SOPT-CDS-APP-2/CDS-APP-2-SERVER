@@ -1,4 +1,4 @@
-package org.sopt.cdsserver.like.domain;
+package org.sopt.cdsserver.heart.domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
