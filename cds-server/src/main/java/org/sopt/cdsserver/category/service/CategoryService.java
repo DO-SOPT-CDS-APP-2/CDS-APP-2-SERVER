@@ -18,7 +18,7 @@ public class CategoryService {
     private final ProductService productService;
 
     public List<ProductListResponse> getCategoryList(final int categoryId) {
-        Category category = categoryJpaRepository.findById(Long.valueOf(categoryId)).orElseThrow(
+        Category category = categoryJpaRepository.findById(categoryId).orElseThrow(
                 () -> new NotFoundException(ErrorType.CATEGORY_NOT_FOUND_EXCEPTION)
         );
         return productService.getProductListByCategory(category);
