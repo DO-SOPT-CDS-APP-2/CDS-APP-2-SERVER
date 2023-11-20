@@ -6,8 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class CdsServerApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CdsServerApplication.class, args);
-	}
+
+    public static void main(String[] args) {
+        SpringApplication.run(CdsServerApplication.class, args);
+    }
 
 }

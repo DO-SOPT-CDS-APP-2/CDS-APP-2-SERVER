@@ -1,4 +1,4 @@
-package org.sopt.cdsserver.member.domain.repository;
+package org.sopt.cdsserver.member.repository;
 
 import org.sopt.cdsserver.member.domain.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
