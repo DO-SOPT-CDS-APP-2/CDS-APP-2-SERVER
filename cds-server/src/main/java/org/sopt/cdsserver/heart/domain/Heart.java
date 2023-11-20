@@ -6,6 +6,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,8 +14,10 @@ import org.sopt.cdsserver.member.domain.Member;
 import org.sopt.cdsserver.product.domain.Product;
 
 @Entity
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@Builder
 public class Heart {
 
     @Id
@@ -27,11 +30,14 @@ public class Heart {
     @ManyToOne
     private Product product;
 
-    @Builder
-    public Heart(Member member, Product product){
-        this.member = member;
-        this.product = product;
+    public static Heart create(Member member, Product product) {
+        return Heart.builder()
+                .member(member)
+                .product(product)
+                .build();
     }
+
+
 
 
 }

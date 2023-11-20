@@ -32,15 +32,11 @@ public class HeartService {
             Product product = productRepository.findById(productId)
                     .orElseThrow(() -> new IllegalArgumentException("Invalid Product ID"));
 
+            Heart newHeart = Heart.create(member, product);
+            heartRepository.save(newHeart);
 
-            // 적절한 세터 메소드를 사용하여 Member와 Product 객체를 설정
 
-            heartRepository.save(
-                    Heart.builder()
-                            .member(member)
-                            .product(product)
-                            .build()
-            );
+
 
             return "Heart Created";
 
