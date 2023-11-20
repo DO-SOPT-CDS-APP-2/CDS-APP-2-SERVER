@@ -3,6 +3,7 @@ package org.sopt.cdsserver.heart.controller;
 import lombok.RequiredArgsConstructor;
 import org.sopt.cdsserver.common.dto.ApiResponse;
 import org.sopt.cdsserver.common.exception.enums.SuccessType;
+import org.sopt.cdsserver.heart.controller.dto.response.HeartPutResponse;
 import org.sopt.cdsserver.heart.service.HeartService;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -18,10 +19,10 @@ public class HeartController {
 
 
     @PutMapping("/{memberId}/{productId}")
-    public ApiResponse<Boolean> toggleHeart(@PathVariable Long memberId, @PathVariable Long productId) {
+    public ApiResponse<HeartPutResponse> toggleHeart(@PathVariable Long memberId, @PathVariable Long productId) {
 
         return ApiResponse.success(SuccessType.CATEGORY_SEARCH_SUCCESS, heartService.toggleHeart(memberId, productId));
-//        return ResponseEntity.ok().body(isHearted ? "HeartAdded" : "HeartDeleted");
+
     }
 
 

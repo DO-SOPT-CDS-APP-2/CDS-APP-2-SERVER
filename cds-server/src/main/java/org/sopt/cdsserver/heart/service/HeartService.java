@@ -1,6 +1,7 @@
 package org.sopt.cdsserver.heart.service;
 
 import lombok.RequiredArgsConstructor;
+import org.sopt.cdsserver.heart.controller.dto.response.HeartPutResponse;
 import org.sopt.cdsserver.heart.domain.Heart;
 import org.sopt.cdsserver.heart.repository.HeartRepository;
 import org.sopt.cdsserver.member.domain.Member;
@@ -22,37 +23,33 @@ public class HeartService {
     private final MemberService memberService;
     private final ProductService productService;
 
-    public boolean toggleHeart(Long memberId, Long productId) {
+    public HeartPutResponse toggleHeart(Long memberId, Long productId) {
 
         Optional<Heart> existingHeart = heartRepository.findByMemberIdAndProductId(memberId, productId);
 
         return existingHeart.map(heart -> {
-            heartRepository.delete(heart);
-            return false;
-        }).orElseGet(() -> {
-            Member member = memberService.getMemberById(memberId);
-            Product product = productService.getProductById(productId);
-            Heart newHeart = Heart.create(member, product);
-            heartRepository.save(newHeart);
-            return true;
-        });
-//        if (existingHeart.isPresent()) {
-//            heartRepository.delete(existingHeart.get());
-//            return false;
-//        } else {
-//            Member member = memberService.getMemberById(memberId);
-//
-//            Product product = productService.getProductById(productId);
-//
-//            Heart newHeart = Heart.create(member, product);
-//            heartRepository.save(newHeart);
-//
-//
-//            return true;
 
-//        }
-//
-   }
+            deleteHeart(heart);
+            return HeartPutResponse.of(null);
+        }).orElseGet(() -> {
+            Heart newHeart = createHeart(memberId, productId);
+            return HeartPutResponse.of(newHeart);
+        });
+
+    }
+
+    private void deleteHeart(Heart heart) {
+        heartRepository.delete(heart);
+
+    }
+
+    private Heart createHeart(Long memberId, Long productId) {
+        Member member = memberService.getMemberById(memberId);
+        Product product = productService.getProductById(productId);
+        Heart newHeart = Heart.create(member, product);
+        heartRepository.save(newHeart);
+        return newHeart;
+    }
 
 
 }
