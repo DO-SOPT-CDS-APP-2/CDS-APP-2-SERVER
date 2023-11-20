@@ -19,14 +19,15 @@ public class HeartService {
     private final HeartRepository heartRepository;
     private final MemberJpaRepository memberRepository;
     private final ProductJpaRepository productRepository;
-    public String toggleHeart(Long memberId, Long productId){
+
+    public String toggleHeart(Long memberId, Long productId) {
 
         Optional<Heart> existingHeart = heartRepository.findByMemberIdAndProductId(memberId, productId);
 
-        if(existingHeart.isPresent()){
+        if (existingHeart.isPresent()) {
             heartRepository.delete(existingHeart.get());
             return "Heart Deleted";
-        }else{
+        } else {
             Member member = memberRepository.findById(memberId)
                     .orElseThrow(() -> new IllegalArgumentException("Invalid Member ID"));
             Product product = productRepository.findById(productId)
@@ -34,8 +35,6 @@ public class HeartService {
 
             Heart newHeart = Heart.create(member, product);
             heartRepository.save(newHeart);
-
-
 
 
             return "Heart Created";
