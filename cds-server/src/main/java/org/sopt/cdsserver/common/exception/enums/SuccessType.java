@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 @AllArgsConstructor
 public enum SuccessType {
 
+    PRODUCT_SEARCH_SUCCESS(HttpStatus.OK, "상품 상세 조회에 성공하였습니다."),
     CATEGORY_SEARCH_SUCCESS(HttpStatus.OK, "카테고리 조회에 성공하였습니다.")
     ;
 
