@@ -6,6 +6,7 @@ import org.sopt.cdsserver.category.domain.Category;
 import org.sopt.cdsserver.common.exception.enums.ErrorType;
 import org.sopt.cdsserver.common.exception.model.NotFoundException;
 import org.sopt.cdsserver.product.controller.dto.response.ProductDetailResponse;
+import org.sopt.cdsserver.product.controller.dto.response.ProductHomeListResponse;
 import org.sopt.cdsserver.product.controller.dto.response.ProductListResponse;
 import org.sopt.cdsserver.product.domain.Product;
 import org.sopt.cdsserver.product.repository.ProductJpaRepository;
@@ -32,6 +33,17 @@ public class ProductService {
                 .map(ProductListResponse::of)
                 .collect(Collectors.toList());
     }
+    public List<ProductHomeListResponse> getProductHomeListByCategory(final Category category){
+        List<Product> productList = productJpaRepository.findAllByCategory(category);
+        if (isProductListEmpty(productList)) {
+            throw new NotFoundException(ErrorType.PRODUCT_NOT_IN_CATEGORY_EXCEPTION);
+
+        }
+        return productList.stream()
+                .map(ProductHomeListResponse::of)
+                .collect(Collectors.toList());
+    }
+
 
     private boolean isProductListEmpty(final List<Product> productList) {
         if (productList.isEmpty()) {

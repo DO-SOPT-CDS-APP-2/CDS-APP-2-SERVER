@@ -2,6 +2,7 @@ package org.sopt.cdsserver.category.controller;
 
 
 import lombok.RequiredArgsConstructor;
+import org.sopt.cdsserver.product.controller.dto.response.ProductHomeListResponse;
 import org.sopt.cdsserver.product.controller.dto.response.ProductListResponse;
 import org.sopt.cdsserver.category.service.CategoryService;
 import org.sopt.cdsserver.common.dto.ApiResponse;
@@ -24,6 +25,14 @@ public class CategoryController {
                 SuccessType.CATEGORY_SEARCH_SUCCESS,
                 categoryService.getCategoryList(categoryId)
                 );
+    }
+
+    @GetMapping("/home")
+    public ApiResponse<List<ProductHomeListResponse>> getHomeCategoryList(){
+        return ApiResponse.success(
+                SuccessType.CATEGORY_SEARCH_SUCCESS,
+                categoryService.getHomeCategoryList(2)
+        );
     }
 
 }
