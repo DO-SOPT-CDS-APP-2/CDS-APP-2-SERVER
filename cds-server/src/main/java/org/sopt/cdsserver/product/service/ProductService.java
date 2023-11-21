@@ -18,6 +18,10 @@ import java.util.stream.Collectors;
 @Service
 public class ProductService {
     private final ProductJpaRepository productJpaRepository;
+    public Product getProductById(final Long productId){
+        return productJpaRepository.findById(productId)
+                .orElseThrow(() -> new NotFoundException(ErrorType.PRODUCT_NOT_FOUND_EXCEPTION));
+    }
 
     public List<ProductListResponse> getProductListByCategory(final Category category) {
         List<Product> productList = productJpaRepository.findAllByCategory(category);
