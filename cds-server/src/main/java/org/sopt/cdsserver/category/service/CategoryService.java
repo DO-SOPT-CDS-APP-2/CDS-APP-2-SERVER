@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.sopt.cdsserver.category.domain.Category;
 import org.sopt.cdsserver.common.exception.enums.ErrorType;
 import org.sopt.cdsserver.common.exception.model.NotFoundException;
+import org.sopt.cdsserver.product.controller.dto.response.ProductHomeListResponse;
 import org.sopt.cdsserver.product.controller.dto.response.ProductListResponse;
 import org.sopt.cdsserver.category.repository.CategoryJpaRepository;
 import org.sopt.cdsserver.product.service.ProductService;
@@ -22,5 +23,10 @@ public class CategoryService {
                 () -> new NotFoundException(ErrorType.CATEGORY_NOT_FOUND_EXCEPTION)
         );
         return productService.getProductListByCategory(category);
+    }
+
+    public List<ProductHomeListResponse> getHomeCategoryList(final int categoryId){
+        Category category = categoryJpaRepository.findById(categoryId).get();
+        return productService.getProductHomeListByCategory(category);
     }
 }
