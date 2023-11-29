@@ -26,7 +26,6 @@ public class HeartService {
         Optional<Heart> existingHeart = heartRepository.findByMemberIdAndProductId(memberId, productId);
 
         return existingHeart.map(heart -> {
-
             deleteHeart(heart);
             return HeartPutResponse.of(null);
         }).orElseGet(() -> {

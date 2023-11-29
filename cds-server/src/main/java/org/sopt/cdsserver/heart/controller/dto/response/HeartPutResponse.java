@@ -2,8 +2,6 @@ package org.sopt.cdsserver.heart.controller.dto.response;
 
 import org.sopt.cdsserver.heart.domain.Heart;
 
-import java.util.Optional;
-
 public record HeartPutResponse(
         boolean isMade
 ) {
