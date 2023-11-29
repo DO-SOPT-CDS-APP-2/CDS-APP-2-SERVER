@@ -26,7 +26,9 @@ public class CategoryService {
     }
 
     public List<ProductHomeListResponse> getHomeCategoryList(final int categoryId){
-        Category category = categoryJpaRepository.findById(categoryId).get();
+        Category category = categoryJpaRepository.findById(categoryId).orElseThrow(
+                () -> new NotFoundException(ErrorType.DATA_NOT_FOUND_EXCEPTION)
+        );
         return productService.getProductHomeListByCategory(category);
     }
 }
