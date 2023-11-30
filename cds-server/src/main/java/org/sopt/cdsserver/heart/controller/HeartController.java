@@ -20,11 +20,8 @@ public class HeartController {
 
     @PutMapping("/{memberId}/{productId}")
     public ApiResponse<HeartPutResponse> toggleHeart(@PathVariable Long memberId, @PathVariable Long productId) {
-
-        return ApiResponse.success(SuccessType.CATEGORY_SEARCH_SUCCESS, heartService.toggleHeart(memberId, productId));
-
+        return ApiResponse.success(SuccessType.HEART_PUT_SUCCESS, heartService.toggleHeart(memberId, productId));
     }
-
 
 }
 
